@@ -4,7 +4,8 @@ import Image from "next/image";
 import ImageDisplay from "@/components/atoms/ImageCard";
 import Button from "@/components/atoms/button";
 import TextHeader from "@/components/atoms/headings";
-
+import { ImOpt } from "react-icons/im";
+import Logo from "@/components/atoms/Logo";
 // Image card data array with titles
 const imageCards = [
   {
@@ -33,8 +34,7 @@ const imageCards = [
 export default function Home() {
   return (
     <div className="max-w-7xl mx-auto py-16">
-      <h1>helo this</h1>
-
+    
       <TextHeader
         text="Where Dreams Meet Destinations"
         specialWordsIndices="1"
@@ -42,6 +42,7 @@ export default function Home() {
         width="622px"
         buttonText="Featured Experience"
       />
+      <Logo />
 
       <div className="grid grid-cols-3 gap-6">
         {imageCards.map((card, index) => (
