@@ -44,7 +44,7 @@ const TextHeader = <TSpecialIndices extends string = string>({
     fontFamily: 'DM Sans, sans-serif',
     fontWeight: 600,
     letterSpacing: '-0.03em',
-    margin: 10,
+    marginBottom:40,
     width: width ?? 'auto',
     ...baseFontStyles[size],
   };
@@ -83,18 +83,20 @@ const TextHeader = <TSpecialIndices extends string = string>({
     center: 'items-center text-center',
     right: 'items-end text-right',
     justify: 'items-stretch text-justify',
+    
   }[align];
 
-  const spacingClass = size === 'medium' ? 'mb-8' : 'mb-5';
+  // Apply margin based on text size
+  const spacingClass = size === 'medium' ? 'mb-10' : 'mb-5';
 
   return (
-    <div className={`flex flex-col ${alignmentClass}`}>
+    <div className={`flex flex-col  ${alignmentClass}`}>
       {buttonText && (
         <div className="mb-2">
           <Button text={buttonText} variant="secondary" textColor="text-primary" />
         </div>
       )}
-      <h1 className={`text-header  ${className} ${spacingClass}`} style={baseStyle}>
+      <h1 className={`text-header ${className} ${spacingClass} `} style={baseStyle}>
         {renderText()}
       </h1>
     </div>

@@ -32,9 +32,9 @@ const Button = <T,>({
       hoverBorder: "hover:border-orange-700",
     },
     secondary: {
-      bg: "",
+      bg: "bg-transparent",
       text: "text-black",
-      border: "border border-gray-300",
+      border: "border border-[#00000033]",
       hoverBg: "hover:bg-gray-200",
       hoverBorder: "hover:border-gray-500",
     },
