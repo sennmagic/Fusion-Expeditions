@@ -21,7 +21,7 @@ const companyLinks = ["About Us", "Contact Us", "Blog", "Terms and Conditions"];
 
 const contactDetails = [
     {
-      icon: <MdCall  className="text-white bg-orange-500 rounded-full text-xl p-2 w-[34px] h-[34px] mb-20 " />,
+      icon: <MdCall  className="text-white bg-orange-500 rounded-full text-xl p-2 w-[34px] h-[34px] " />,
       title: "",
       text: (
         <>
