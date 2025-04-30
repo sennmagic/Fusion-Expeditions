@@ -1,26 +1,44 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Your existing variables */
+    --color-primary: #F28A15;
+    --font-dm-sans: 'DM Sans';
+    
+    /* Global Spacing System */
+    --global-spacer: 2rem; /* Base spacer value (32px) */
+    
+    /* Vertical rhythm spacing */
+    --spacer-y: var(--global-spacer);
+    
+    /* Section spacing */
+    --section-spacer: calc(var(--global-spacer) * 2);
+  }
+
+  /* Add automatic spacing to common elements */
+  body {
+    @apply overflow-x-hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply mb-[var(--spacer-y)];
+  }
+
+  p {
+    @apply mb-[var(--spacer-y)];
+  }
+
+  section {
+    @apply py-[var(--section-spacer)];
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  /* Spacer utility classes */
+
+  /* Your existing utilities */
+  .text-primary { color: var(--color-primary); }
+  .bg-primary { background-color: var(--color-primary); }
+  .border-primary { border-color: var(--color-primary); }
 }
