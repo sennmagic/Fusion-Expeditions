@@ -3,7 +3,7 @@
 import React from 'react';
 import Button from '../button';
 
-type TextAlign = 'left' | 'center' | 'right' | 'justify';
+type TextAlign = 'left' | 'center' | 'right' | 'justify' | 'start' | 'end';
 type TextSize = 'medium' | 'small';
 
 interface TextHeaderProps<TSpecialIndices = string> {
@@ -39,18 +39,19 @@ const TextHeader = <TSpecialIndices extends string = string>({
   };
 
   const baseStyle: React.CSSProperties = {
-    color: '#2C2727',
     textAlign: align,
     fontFamily: 'DM Sans, sans-serif',
+    color: '#2C2727',
     fontWeight: 600,
     letterSpacing: '-0.03em',
-    marginBottom:40,
+    marginBottom: 40,
     width: width ?? 'auto',
     ...baseFontStyles[size],
   };
 
   const specialStyle: React.CSSProperties = {
     fontFamily: 'Playfair Display, serif',
+    color:'#2C2727',
     fontWeight: 500,
     fontStyle: 'italic',
     letterSpacing: '-0.03em',
@@ -84,6 +85,8 @@ const TextHeader = <TSpecialIndices extends string = string>({
     right: 'items-end text-right',
     justify: 'items-stretch text-justify',
     
+    start: 'items-start text-left',
+    end: 'items-end text-right',
   }[align];
 
   // Apply margin based on text size

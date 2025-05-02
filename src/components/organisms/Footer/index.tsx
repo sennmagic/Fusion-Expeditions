@@ -48,9 +48,9 @@ export default function Footer() {
   return (
     
 
-<footer className="bg-gradient-to-t from-[#85cdf4] to-[#ffff]">
+<footer className="bg-gradient-to-t from-[#85cdf4] to-[#fef9ee]">
   <Image
-    src="/images/footer-top.png"
+    src="/images/footerTopImage.png"
     width={1200}
     height={200}
     alt="Footer Top Image"
