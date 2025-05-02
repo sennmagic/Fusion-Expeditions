@@ -3,7 +3,7 @@
 
 import React from "react";
 import { FaArrowLeft, FaArrowRight, FaStar } from "react-icons/fa";
-import TextHeader from "../../atoms/headings"; // Adjust the import path as needed
+import TextHeader from "../../atoms/headings";
 
 const testimonials = [
   {
@@ -69,7 +69,7 @@ const TestimonialCarousel = () => {
         buttonText="What They Say"
       />
 
-      <div className="flex items-center gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth px-2 py-6 bg-gradient-to-r from-transparent via-blue-600 to-transparent rounded-xl">
+      <div className="flex items-center gap-6  px-2 py-6 bg-gradient-to-r from-transparent via-blue-600 to-transparent rounded-xl">
         {testimonials.map((t, i) => (
           <TestimonialCard key={i} {...t} />
         ))}
