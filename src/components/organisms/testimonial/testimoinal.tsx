@@ -38,20 +38,20 @@ interface TestimonialCardProps {
 
 const TestimonialCard: React.FC<TestimonialCardProps> = ({ quote, name, role, image }) => {
   return (
-    <div className="min-w-[320px] max-w-[380px]  h-[250px] bg-orange-200 rounded-xl p-6 snap-center flex-shrink-0 shadow-md">
-      <div className="text-yellow-500 flex ">
+    <div className="min-w-[320px] max-w-[400px]  h-[250px] bg-orange-200 rounded-xl p-6 snap-center flex-shrink-0 shadow-md">
+      <div className="text-yellow-500 flex  mb-3">
         {Array(5)
           .fill(0)
           .map((_, i) => (
             <FaStar key={i} />
           ))}
       </div>
-      <p className="text-m text-bold mb-4 text-[#2C2727] font-dmSans">{quote}</p>
-      <div className="flex items-center gap-3 mt-4">
+      <p className="text-m text-bold text-base mb-1 text-[#2C2727] font-dmSans">{quote}</p>
+      <div className="flex items-start gap-3 mt-4">
         <img src={image} className="w-10 h-10 rounded-full object-cover" alt={name} />
-        <div>
-          <p className="font-semibold text-bold text-[#2C2727] font-dmSans">{name}</p>
-          <p className="text-xs text-gray-600 font-dmSans">{role}</p>
+        <div className="flex flex-col w-1/2 h-[50px] justify-start">
+          <p className="font-semibold text-bold text-[#2C2727] font-dmSans mb-1">{name}</p>
+          <p className="text-bold text-gray-600 font-dmSans">{role}</p>
         </div>
       </div>
     </div>
@@ -69,7 +69,7 @@ const TestimonialCarousel = () => {
         buttonText="What They Say"
       />
 
-      <div className="flex items-center gap-6  px-2 py-6 bg-gradient-to-r from-transparent via-blue-600 to-transparent rounded-xl">
+      <div className="flex items-center gap-6  px-1 py-6 bg-[linear-gradient(90deg,_#FEF9EE_0.88%,_#1C9ADB_32.63%,_#0F7BBA_70.26%,_#FEF9EE_100%)] ">
         {testimonials.map((t, i) => (
           <TestimonialCard key={i} {...t} />
         ))}
