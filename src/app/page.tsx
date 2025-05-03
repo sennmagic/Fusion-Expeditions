@@ -1,10 +1,13 @@
 import Image from "next/image";
-
+import { FaMapMarkerAlt } from 'react-icons/fa';
+import { HiOutlineClock } from 'react-icons/hi';
+import { FaHiking } from 'react-icons/fa';
 // Atom Components
 import ImageDisplay from "@/components/atoms/ImageCard";
 import Button from "@/components/atoms/button";
 import TextHeader from "@/components/atoms/headings";
 import TestimonialCarousel from "@/components/organisms/testimonial/testimoinal";  
+import ArrowIcon from "@/components/atoms/arrowIcon";
 // Image card data array with titles
 const imageCards = [
   {
@@ -81,7 +84,10 @@ const destinations = [
 const PopularTour = [
   {
     src: "/image.png",
+    location: "Pokhara, Nepal",
+    duration: "2 Days",
     title: "Explore the Beauty of Phewa Lake & Peace Pagoda",
+    priceRange: "$200 - $300",
     variant: "rectangle",
     snippet: "Moderate",
     snippetPosition: "center",
@@ -89,7 +95,10 @@ const PopularTour = [
   },
   {
     src: "/image.png",
+    location: "Pokhara, Nepal",
+    duration: "2 Days",
     title: "Explore the Beauty of Phewa Lake & Peace Pagoda",
+    priceRange: "$200 - $300",
     variant: "rectangle",
     snippet: "Moderate",
     snippetPosition: "center",
@@ -97,7 +106,10 @@ const PopularTour = [
   },
   {
     src: "/image.png",
+    location: "Pokhara, Nepal",
+    duration: "2 Days",
     title: "Explore the Beauty of Phewa Lake & Peace Pagoda",
+    priceRange: "$200 - $300",
     variant: "rectangle",
     snippet: "Moderate",
     snippetPosition: "center",
@@ -163,6 +175,30 @@ const blogscards = [
   },
 
 ]
+
+const journeyCards = [
+  {
+    src: "/images/Journey.png",
+    title: "@jane87",
+    variant: "smallsquare",
+  },
+  {
+    src: "/images/Journey.png",
+    title: "@jane87",
+    variant: "smallsquare",
+  },
+  {
+    src: "/images/Journey.png",
+    title: "@jane87",
+    variant: "smallsquare",
+
+  },
+  {
+    src: "/images/Journey.png",
+    title: "@jane87",
+    variant: "smallsquare",
+  },
+];
 
 
 
@@ -266,7 +302,7 @@ export default function Home() {
 
         />
 
-        <div className="absolute inset-0 z-10 absolute inset-0 z-10 flex flex-col justify-center items-center text-center">
+        <div className="absolute inset-0 z-10 flex flex-col justify-center items-center text-center">
           <TextHeader
             text="Our Everest Base Camp Trek is loved worldwide"
             specialWordsIndices="7"
@@ -276,6 +312,12 @@ export default function Home() {
           <p className="mt-4 max-w-xl">
             Everest Base Camp Trek is a world-renowned adventure that takes you deep into the heart of the Himalayas. Experience breathtaking views.
           </p>
+          <div className=" flex justify-between items-center text-xl font-semibold text-black-500 gap-5 mb-2">
+          <span className="flex justify-between items-center gap-2"> <HiOutlineClock className="items-center w-6 h-6" />12-14 Days</span>
+                 <span className="flex justify-between items-center gap-2"> <FaMapMarkerAlt className=" items-center w-6 h-6" />Everest (Khumbu), Nepal</span>
+                 <span className="flex justify-between items-center gap-2"> <FaHiking className=" items-center w-6 h-6" />Moderate to Challanging</span>
+             </div>
+          <Button text="Start Your Advanture" variant="primary" textColor="text-white" className="mt-4" />
         </div>
       </section>
 
@@ -283,7 +325,7 @@ export default function Home() {
       <section className="max-w-7xl mx-auto">
         <TextHeader
           text="Amazing tour places around the Nepal"
-          specialWordsIndices="2,3"
+          specialWordsIndices="1,2"
           align="left"
           width="622px"
           buttonText="Popular Tour"
@@ -299,8 +341,22 @@ export default function Home() {
                 snippetPosition="start"
 
               />
+              <div className=" flex justify-between items-center text-xl font-semibold text-gray-500 gap-35 mt-4">
+                 <span className="flex justify-between items-center gap-2"> <FaMapMarkerAlt className=" items-center w-6 h-6" />{card.location}</span>
+                 <span className="flex justify-between items-center gap-2"> <HiOutlineClock className="items-center w-6 h-6" />{card.duration}</span>
+             </div>
               <TextHeader text={PopularTour[index].title} size="small" align="start" />
+
+              <hr className="w-full h-1 " />
+
+              <p className="flex justify-between items-center gap-38 text-2xl text-gray-500">
+            Start From{' '}
+            <span className={card.priceRange ? 'text-orange-500 font-semibold' : 'text-gray-700'}>
+              {card.priceRange}
+            </span>
+          </p>
             </div>
+            
           ))}
 
         </div>
@@ -311,27 +367,36 @@ export default function Home() {
         <TestimonialCarousel />
 
       {/* Share the joy of your journey */}
-      <section className=" mx-auto bg-blue-900">
-        <div className=" ml-20">
+      <section className=" bg-blue-950 ">
+        <div className="max-w-7xl mx-auto text-white">
           <TextHeader
             text="Share the joy of your journey"
-            specialWordsIndices="1"
+            specialWordsIndices="2"
             align="start"
             width="622px"
-
+            textcolor="white"
           />
-
-          <div className="flex flex-cols-1 gap-6">
-
-            {imageCards.map((card, index) => (
-              <div key={index} className="flex flex-col items-center ">
+          <p className="mt-4 text-white">
+            Join our community of travelers and share your unforgettable experiences with us. Your stories inspire others to explore the world.
+          </p>
+          
+           
+          <div className=" flex flex-cols-1 gap-6">
+      
+            {journeyCards.map((card, index) => (
+              <div key={index} className="flex flex-col items-center  ">
                 <ImageDisplay
                   src={card.src}
-                  variant="square"
-                  snippet={card.snippet}
-                  snippetPosition="start"
+                  variant="smallsquare"
+                  secondSnippet={
+                    <TextHeader 
+                      text={card.title}
+                      size="small"
+                      align="end"
+                      textcolor="white"
+                     / >
+                  }
                 />
-                <TextHeader text="Explore the Beauty of Phewa Lake & Peace Pagoda" size="small" align="start" />
               </div>
             ))}
 

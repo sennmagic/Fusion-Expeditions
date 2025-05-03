@@ -2,8 +2,10 @@
 'use client';
 
 import React from "react";
-import { FaArrowLeft, FaArrowRight, FaStar } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
 import TextHeader from "../../atoms/headings";
+import ArrowIcon from "@/components/atoms/arrowIcon";
+
 
 const testimonials = [
   {
@@ -38,6 +40,16 @@ interface TestimonialCardProps {
 
 const TestimonialCard: React.FC<TestimonialCardProps> = ({ quote, name, role, image }) => {
   return (
+    <div>
+      <ArrowIcon 
+        size={40}
+        color="#fff"
+        backgroundColor="#f7931e"
+        iconPadding={10}
+        borderRadius="50%"
+        direction="down"
+        position="top-left"
+      />
     <div className="min-w-[320px] max-w-[400px]  h-[250px] bg-orange-200 rounded-xl p-6 snap-center flex-shrink-0 shadow-md">
       <div className="text-yellow-500 flex  mb-3">
         {Array(5)
@@ -55,12 +67,13 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ quote, name, role, im
         </div>
       </div>
     </div>
+    </div>
   );
 };
 
 const TestimonialCarousel = () => {
   return (
-    <div className="relative max-w-7xl mx-auto px-4 py-10">
+    <div className="relative max-w-7xl mx-auto item-center px-4 py-10">
       <TextHeader
         text="Hear from Our Travelers: Testimonials & Stories"
         specialWordsIndices="4"

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 
-type Variant = 'rectangle' | 'square';
+type Variant = 'rectangle' | 'square' | 'smallsquare';
 type SnippetPosition = 'center' | 'start' | 'end';
 
 interface ImageDisplayProps<T = string> {
@@ -15,11 +15,14 @@ interface ImageDisplayProps<T = string> {
   height?: number;
   snippet?: string;
   snippetPosition?: SnippetPosition;
+  secondSnippet?: React.ReactNode;
+  secondSnippetPosition?: SnippetPosition;
 }
 
 const defaultDimensions = {
   rectangle: { width: 816, height: 430 },
   square: { width: 408, height: 430 },
+  smallsquare: { width: 300, height: 350 },
 };
 
 const getSnippetPositionClasses = (position: SnippetPosition) => {
@@ -44,6 +47,8 @@ const ImageDisplay = <T extends string>({
   height,
   snippet,
   snippetPosition = 'start',
+  secondSnippet,
+  secondSnippetPosition = 'end',
 }: ImageDisplayProps<T>) => {
   const [isError, setIsError] = useState(false);
   const shouldShowPlaceholder = isError || !src;
@@ -87,6 +92,19 @@ const ImageDisplay = <T extends string>({
           {snippet}
         </div>
       )}
+
+{secondSnippet && (
+  <div
+    className={`absolute z-10 text-white text-base font-medium inline-flex items-center whitespace-nowrap ${getSnippetPositionClasses(secondSnippetPosition ?? 'end')}`}
+    style={{
+      backgroundColor: 'transparent', 
+      borderRadius: '10px',
+      padding: '6px 16px',
+    }}
+  >
+    {secondSnippet}
+  </div>
+)}
     </div>
   );
 };

@@ -14,6 +14,7 @@ interface TextHeaderProps<TSpecialIndices = string> {
   specialWordsIndices?: TSpecialIndices;
   size?: TextSize;
   buttonText?: string;
+  textcolor?: string;
 }
 
 const TextHeader = <TSpecialIndices extends string = string>({
@@ -24,6 +25,7 @@ const TextHeader = <TSpecialIndices extends string = string>({
   specialWordsIndices = '' as TSpecialIndices,
   size = 'medium',
   buttonText,
+  textcolor='',
 }: TextHeaderProps<TSpecialIndices>) => {
   const validText = typeof text === 'string' ? text : '';
 
@@ -41,7 +43,7 @@ const TextHeader = <TSpecialIndices extends string = string>({
   const baseStyle: React.CSSProperties = {
     textAlign: align,
     fontFamily: 'DM Sans, sans-serif',
-    color: '#2C2727',
+    color: textcolor || '#2C2727',
     fontWeight: 600,
     letterSpacing: '-0.03em',
     marginBottom: 40,
@@ -51,7 +53,7 @@ const TextHeader = <TSpecialIndices extends string = string>({
 
   const specialStyle: React.CSSProperties = {
     fontFamily: 'Playfair Display, serif',
-    color:'#2C2727',
+    color:textcolor || '#2C2727',
     fontWeight: 500,
     fontStyle: 'italic',
     letterSpacing: '-0.03em',
