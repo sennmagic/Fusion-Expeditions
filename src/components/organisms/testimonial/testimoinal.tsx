@@ -47,7 +47,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ quote, name, role, im
         backgroundColor="#f7931e"
         iconPadding={10}
         borderRadius="50%"
-        direction="down"
+        direction="left"
         position="top-left"
       />
     <div className="min-w-[320px] max-w-[400px]  h-[250px] bg-orange-200 rounded-xl p-6 snap-center flex-shrink-0 shadow-md">

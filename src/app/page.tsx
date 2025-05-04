@@ -8,31 +8,40 @@ import Button from "@/components/atoms/button";
 import TextHeader from "@/components/atoms/headings";
 import TestimonialCarousel from "@/components/organisms/testimonial/testimoinal";  
 import ArrowIcon from "@/components/atoms/arrowIcon";
+import Navbar from "@/components/organisms/NavBar";
 // Image card data array with titles
-const imageCards = [
+const FeatureCard = [
   {
     src: "/image.png",
-    title: "Dreamy Beach Escape",
-    variant: "square",
-    snippet: "Popular",
-    snippetPosition: "start",
+    location: "Pokhara, Nepal",
+    duration: "2 Days",
+    title: "Explore the Beauty of Phewa Lake & Peace Pagoda",
+    priceRange: "$200 - $300",
+    variant: "rectangle",
+    snippet: "Moderate",
+    snippetPosition: "center",
   },
   {
     src: "/image.png",
-    title: "Mountain Adventure",
-    variant: "square",
-    snippet: "Top Pick",
-    snippetPosition: "start",
+    location: "Pokhara, Nepal",
+    duration: "2 Days",
+    title: "Explore the Beauty of Phewa Lake & Peace Pagoda",
+    priceRange: "$200 - $300",
+    variant: "rectangle",
+    snippet: "Moderate",
+    snippetPosition: "center",
   },
   {
     src: "/image.png",
-    title: "City Lights Weekend",
-    variant: "square",
-    snippet: "Limited Time",
-    snippetPosition: "start",
+    location: "Pokhara, Nepal",
+    duration: "2 Days",
+    title: "Explore the Beauty of Phewa Lake & Peace Pagoda",
+    priceRange: "$200 - $300",
+    variant: "rectangle",
+    snippet: "Moderate",
+    snippetPosition: "center",
   },
-
-];
+]
 
 const destinations = [
   {
@@ -203,32 +212,99 @@ const journeyCards = [
 
 
 export default function Home() {
-  return (
-    <section className="bg-orange-50">
+  return ( 
+    <div className="bg-orange-50">
+    {/* Hero Section */} 
+      <section className="mx-auto relative w-full h-screen overflow-hidden">
+      <Navbar />
+        <Image
+          src="/images/herosection.gif"
+          alt="Hero Background"
+          layout="fill"
+          objectFit="cover"
+          priority
+        />
 
-      {/* Featured Experience */}
+         <TextHeader
+          text="Discover the Nepal with Ease"
+          specialWordsIndices="2"
+          align="center"
+          width="400px"
+          textcolor="white"
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+          />
+         <div className="absolute top-[80%] left-1/2 transform -translate-x-1/2 w-[100%] max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-6 md:gap-20 mb-10 text-center md:text-left">
+  <p className="text-white text-base md:text-lg max-w-xl">
+    Whether you’re chasing sunsets on tropical beaches, trekking through the Himalayas, or exploring the hidden gems of Nepal – we’re here to make every moment unforgettable.
+  </p>
+  <div className="pl-100 justify-center items-center gap-4 md:flex hidden">
+  <Button 
+    text="View Packages" 
+    variant="secondary" 
+    textColor="text-white" 
+    className="border border-white  mt-4 md:mt-0 "
+  />
+</div>
+</div>
+
+        </section>
+
+        
+
+         {/* Featured expericence*/}
       <section className="max-w-7xl mx-auto">
         <TextHeader
           text="Where Dreams Meet Destinations"
-          specialWordsIndices="1"
+          specialWordsIndices="3"
           align="center"
           width="622px"
           buttonText="Featured Experience"
         />
 
         <div className="grid grid-cols-3 gap-6">
-          {imageCards.map((card, index) => (
+          {FeatureCard.map((card, index) => (
             <div key={index} className="flex flex-col items-center text-center">
               <ImageDisplay
                 src={card.src}
                 variant="square"
                 snippet={card.snippet}
                 snippetPosition="start"
+
               />
-              <TextHeader text={imageCards[index].title} size="small" align="start" />
+              <div className=" flex justify-between items-center text-xl font-semibold text-gray-500 gap-35 mt-4">
+                 <span className="flex justify-between items-center gap-2"> <FaMapMarkerAlt className=" items-center w-6 h-6" />{card.location}</span>
+                 <span className="flex justify-between items-center gap-2"> <HiOutlineClock className="items-center w-6 h-6" />{card.duration}</span>
+             </div>
+              <TextHeader text={PopularTour[index].title} size="small" align="start" />
+
+              <hr className="w-full h-1 " />
+
+              <p className="flex justify-between items-center gap-38 text-2xl text-gray-500">
+            Start From{' '}
+            <span className={card.priceRange ? 'text-orange-500 font-semibold' : 'text-gray-700'}>
+              {card.priceRange}
+            </span>
+          </p>
             </div>
+            
           ))}
 
+        </div>
+      </section>
+         
+
+      <section className=" mx-auto">
+      <div>
+      <Image
+          src="/images/flight.png"
+          alt="Hero Background"
+          width={600}
+          height={877}
+          layout= "responsive"
+          className="mx-auto"
+          
+       
+        />
         </div>
       </section>
 
@@ -262,6 +338,7 @@ export default function Home() {
           })}
         </div>
       </section>
+
 
 
       {/* Top categories */}
@@ -445,7 +522,7 @@ export default function Home() {
         </div>
       </section>
 
-    </section>
+    </div>
 
 
 
