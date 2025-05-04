@@ -1,11 +1,13 @@
 import Image from "next/image";
 import { MdCall, MdEmail, MdLocationOn } from "react-icons/md";
-
+import { FaInstagram, FaFacebookF, FaYoutube } from "react-icons/fa";
+import Logo from "@/components/atoms/Logo";
+import { FaCcVisa, FaCcMastercard, FaCcAmex } from "react-icons/fa";
 
 const socialLinks = [
-  { icon: "/images/Insta.png", link: "#" },
-  { icon: "/images/Fb.png", link: "#" },
-  { icon: "/images/youtube.png", link: "#" },
+  { icon: <FaInstagram className="text-white bg-[#F7941D] p-2 rounded-xl w-10 h-10"/>, link: "#" },
+  { icon: <FaFacebookF className="text-white bg-[#F7941D] p-2 rounded-xl w-10 h-10"/>, link: "#" },
+  { icon: <FaYoutube className="text-white bg-[#F7941D] p-2 rounded-xl w-10 h-10"/>, link: "#" },
 ];
 
 const destinations = [
@@ -21,7 +23,7 @@ const companyLinks = ["About Us", "Contact Us", "Blog", "Terms and Conditions"];
 
 const contactDetails = [
     {
-      icon: <MdCall  className="text-white bg-orange-500 rounded-full text-xl p-2 w-[34px] h-[34px] mb-20 " />,
+      icon: <MdCall  className="text-white bg-orange-500 rounded-full text-xl p-2 w-[34px] h-[34px] " />,
       title: "",
       text: (
         <>
@@ -48,9 +50,9 @@ export default function Footer() {
   return (
     
 
-<footer className="bg-gradient-to-t from-[#85cdf4] to-[#ffff]">
+<footer className="bg-gradient-to-t from-[#85cdf4] to-[#fef9ee]">
   <Image
-    src="/images/footer-top.png"
+    src="/images/footerTopImage.png"
     width={1200}
     height={200}
     alt="Footer Top Image"
@@ -64,14 +66,8 @@ export default function Footer() {
       <div className="w-full lg:w-4/12 flex flex-col space-y-6  ">
         {/* Logo */}
         <div className="w-[150px] md:w-[180px]">
-          <Image
-            src="/images/logodark.png"
-            alt="Fusion Expeditions Logo"
-            width={180}
-            height={60}
-            className="object-contain"
-          />
-        </div>
+        
+<Logo />        </div>
 
         {/* Newsletter */}
         <div className="space-y-1">
@@ -101,7 +97,7 @@ export default function Footer() {
           <div className="flex space-x-2">
             {socialLinks.map((link, index) => (
               <a key={index} href={link.link} className="hover:scale-110 transition-transform">
-                <Image src={link.icon} alt="Social Icon" width={30} height={30} />
+                <span>{link.icon}</span>
               </a>
             ))}
           </div>
@@ -156,9 +152,14 @@ export default function Footer() {
           <div className="mt-6 ml-12">
             <p className="text-2xl font-bold">We Accept</p>
             <div className="flex gap-4 mt-2">
+            <FaCcVisa className="w-[80px] h-[80px] text-[#1A1F71]" />
+           <FaCcMastercard className="w-[80px] h-[80px] text-[#EB001B]" />
+             <FaCcAmex className="w-[80px] h-[80px] text-[#2E77BC]" />
+              {/* Payment logos can be added here 
               <Image src="/images/mc-logo-52.svg" alt="Mastercard" width={80} height={20} />
               <Image src="/images/visa .svg" alt="Visa" width={100} height={20} />
               <Image src="/images/american express.svg" alt="Amex" width={80} height={20} />
+              */}
             </div>
           </div>
         </div>

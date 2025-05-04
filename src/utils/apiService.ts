@@ -10,12 +10,8 @@ interface FetchAPIOptions<T> {
   slug?: string;
 }
 
-export const fetchAPI = async <T = unknown, R = unknown>({
-  endpoint,
-  method = "GET",
-  data,
-  id,
-  slug,
+export const fetchAPI = async <T = unknown, R = unknown>(p0: string, p1: string, p2: null, p3: null, p4: string, {
+  endpoint, method = "GET", data, id, slug,
 }: FetchAPIOptions<T>): Promise<R> => {
   const accessToken = Cookies.get("access_token");
 

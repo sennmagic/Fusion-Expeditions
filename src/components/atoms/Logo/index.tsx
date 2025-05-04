@@ -1,9 +1,15 @@
 "use client"
-import { url } from 'inspector';
 import React, { useEffect, useState } from 'react';
 
+interface LogoType {
+  url: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+
 const Logo = () => {
-  const [logo, setLogo] = useState(null);
+  const [logo, setLogo] = useState<LogoType | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -16,8 +22,9 @@ const Logo = () => {
         }
         const result = await response.json();
         const imageData = result.data.image;
+        console.log(imageData.url)
         setLogo({
-         url:imageData.url,
+          url: imageData.url,
           alt: imageData.alt || 'Logo',
           width: imageData.width,
           height: imageData.height,
@@ -38,10 +45,10 @@ const Logo = () => {
   return (
     <div className="flex justify-center">
       <img
-        src={logo.url}
-        alt={logo.alt}
-        width={logo.width}
-        height={logo.height}
+        src={`https://fusionexpeditions.onrender.com${logo?.url}`}
+        alt={logo?.alt}
+        width={150}
+        height={logo?.height}
         className="h-auto"
       />
     </div>

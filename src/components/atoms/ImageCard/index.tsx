@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 
-type Variant = 'rectangle' | 'square';
+type Variant = 'rectangle' | 'square' | 'smallsquare' | 'smallrectangle';
 type SnippetPosition = 'center' | 'start' | 'end';
 
 interface ImageDisplayProps<T = string> {
@@ -11,27 +11,31 @@ interface ImageDisplayProps<T = string> {
   className?: string;
   placeholderSrc?: T;
   variant?: Variant;
-  width?: number;
-  height?: number;
+  height?: number | string;
+  width?: number | string;
   snippet?: string;
   snippetPosition?: SnippetPosition;
+  secondSnippet?: React.ReactNode;
+  secondSnippetPosition?: SnippetPosition;
 }
-
-const defaultDimensions = {
-  rectangle: { width: 952, height: 571 },
-  square: { width: 408, height: 430 },
-};
 
 const getSnippetPositionClasses = (position: SnippetPosition) => {
   switch (position) {
     case 'start':
-      return 'top-[15px] left-[30px]';
+      return 'top-4 left-4';
     case 'end':
-      return 'bottom-[15px] right-[30px]';
+      return 'bottom-4 right-4';
     case 'center':
     default:
-      return 'top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2';
+      return 'top-4 left-1/2 -translate-x-1/2';
   }
+};
+
+const defaultDimensions = {
+  rectangle: { width: 820, height: 590 },
+  square: { width: 408, height: 430 },
+  smallsquare: { width: 200, height: 200 },
+  smallrectangle: { width: 408, height: 236 },
 };
 
 const ImageDisplay = <T extends string>({
@@ -40,32 +44,37 @@ const ImageDisplay = <T extends string>({
   className = '',
   placeholderSrc,
   variant = 'square',
-  width,
   height,
+  width,
   snippet,
   snippetPosition = 'start',
+  secondSnippet,
+  secondSnippetPosition = 'end',
 }: ImageDisplayProps<T>) => {
   const [isError, setIsError] = useState(false);
   const shouldShowPlaceholder = isError || !src;
 
-  const finalWidth = width ?? defaultDimensions[variant].width;
-  const finalHeight = height ?? defaultDimensions[variant].height;
+  const dimensions = defaultDimensions[variant];
+  const finalWidth = width ?? dimensions.width;
+  const finalHeight = height ?? dimensions.height;
 
   return (
     <div
-      className={`max-w-7xl mx-auto relative overflow-hidden rounded-[20px] bg-gray-100 flex justify-center items-center text-gray-400 text-sm ${className}`}
+      className={`relative overflow-hidden rounded-xl ${className}`}
       style={{ width: finalWidth, height: finalHeight }}
     >
       {shouldShowPlaceholder ? (
-        placeholderSrc ? (
-          <img
-            src={placeholderSrc}
-            alt="Placeholder"
-            className="w-full h-full object-cover"
-          />
-        ) : (
-          <span>{finalWidth}x{finalHeight}</span>
-        )
+        <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+          {placeholderSrc ? (
+            <img
+              src={placeholderSrc}
+              alt="Placeholder"
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <span className="text-gray-400">Image not available</span>
+          )}
+        </div>
       ) : (
         <img
           src={src}
@@ -77,15 +86,21 @@ const ImageDisplay = <T extends string>({
 
       {snippet && (
         <div
-          className={`absolute z-10 text-white text-lg font-semibold inline-flex items-center whitespace-nowrap ${getSnippetPositionClasses(snippetPosition)}`}
-          style={{
-            backgroundColor: '#F28A15',
-            borderRadius: '12px',
-            padding: '10px 20px',
-              
-          }}
+          className={`absolute z-10 text-white text-sm font-semibold px-4 py-2 bg-orange-500 rounded-lg ${getSnippetPositionClasses(
+            snippetPosition
+          )}`}
         >
           {snippet}
+        </div>
+      )}
+
+      {secondSnippet && (
+        <div
+          className={`absolute z-10 text-white text-sm font-medium ${getSnippetPositionClasses(
+            secondSnippetPosition
+          )}`}
+        >
+          {secondSnippet}
         </div>
       )}
     </div>

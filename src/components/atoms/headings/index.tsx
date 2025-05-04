@@ -1,10 +1,12 @@
 'use client';
 
-import React from 'react';
+import React, { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import Button from '../button';
 
-type TextAlign = 'left' | 'center' | 'right' | 'justify';
+type TextAlign = 'left' | 'center' | 'right' | 'justify' | 'start' | 'end';
 type TextSize = 'medium' | 'small';
+type TextHeaderType = 'main' | 'default';
 
 interface TextHeaderProps<TSpecialIndices = string> {
   text?: string;
@@ -14,17 +16,27 @@ interface TextHeaderProps<TSpecialIndices = string> {
   specialWordsIndices?: TSpecialIndices;
   size?: TextSize;
   buttonText?: string;
+  textcolor?: string;
+  type?: TextHeaderType; // new prop
 }
 
 const TextHeader = <TSpecialIndices extends string = string>({
   text = '',
   align = 'center',
   className = '',
-  width,
+  width = '100%',
   specialWordsIndices = '' as TSpecialIndices,
   size = 'medium',
   buttonText,
+  textcolor = '',
+  type = 'default',
 }: TextHeaderProps<TSpecialIndices>) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, {
+    once: false,
+    margin: '-10% 0px -10% 0px',
+  });
+
   const validText = typeof text === 'string' ? text : '';
 
   const baseFontStyles = {
@@ -33,24 +45,26 @@ const TextHeader = <TSpecialIndices extends string = string>({
       lineHeight: '57.6px',
     },
     small: {
-      fontSize: '30px',
+      fontSize: '24px',
       lineHeight: '38.4px',
     },
   };
 
   const baseStyle: React.CSSProperties = {
-    color: '#2C2727',
     textAlign: align,
     fontFamily: 'DM Sans, sans-serif',
+    color: textcolor || '#2C2727',
     fontWeight: 600,
     letterSpacing: '-0.03em',
-    marginBottom:40,
-    width: width ?? 'auto',
+    marginBottom: 0,
+    paddingBottom: 0,
+    width: typeof width === 'number' ? `${width}px` : width,
     ...baseFontStyles[size],
   };
 
   const specialStyle: React.CSSProperties = {
     fontFamily: 'Playfair Display, serif',
+    color: textcolor || '#2C2727',
     fontWeight: 500,
     fontStyle: 'italic',
     letterSpacing: '-0.03em',
@@ -64,41 +78,62 @@ const TextHeader = <TSpecialIndices extends string = string>({
         .filter((index) => !isNaN(index))
     : [];
 
-  const renderText = () => {
-    const words = validText.split(' ');
+  const words = validText.split(' ');
 
-    return words.map((word, index) => {
+  const renderText = () =>
+    words.map((word, index) => {
       const isSpecial = specialIndices.includes(index);
       return (
-        <span key={index} style={isSpecial ? specialStyle : {}}>
+        <motion.span
+          key={index}
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{
+            delay: index * 0.07,
+            duration: 0.5,
+            ease: 'easeOut',
+          }}
+          style={isSpecial ? specialStyle : {}}
+        >
           {word}{' '}
-        </span>
+        </motion.span>
       );
     });
-  };
 
-  // Determine alignment class
   const alignmentClass = {
     left: 'items-start text-left',
     center: 'items-center text-center',
     right: 'items-end text-right',
     justify: 'items-stretch text-justify',
-    
+    start: 'items-start text-left',
+    end: 'items-end text-right',
   }[align];
 
-  // Apply margin based on text size
-  const spacingClass = size === 'medium' ? 'mb-10' : 'mb-5';
-
   return (
-    <div className={`flex flex-col  ${alignmentClass}`}>
+    <div
+      ref={ref}
+      className={`flex flex-col ${alignmentClass}`}
+      style={{ width: typeof width === 'number' ? `${width}px` : width }}
+    >
       {buttonText && (
-        <div className="mb-2">
+        <motion.div
+          initial={{ opacity: 0, x: -10 }}
+          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+          className="mb-2"
+        >
           <Button text={buttonText} variant="secondary" textColor="text-primary" />
-        </div>
+        </motion.div>
       )}
-      <h1 className={`text-header ${className} ${spacingClass} `} style={baseStyle}>
+      <motion.h1
+        className={`text-header mb-0 pb-0 ${type === 'main' ? 'mb-6' : ''} ${className}`}
+        style={baseStyle}
+        initial={{ opacity: 0, y: 40 }}
+        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+      >
         {renderText()}
-      </h1>
+      </motion.h1>
     </div>
   );
 };
