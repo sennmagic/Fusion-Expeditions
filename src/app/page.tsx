@@ -9,6 +9,7 @@ import TextHeader from "@/components/atoms/headings";
 import TestimonialCarousel from "@/components/organisms/testimonial/testimoinal";  
 import ArrowIcon from "@/components/atoms/arrowIcon";
 import Navbar from "@/components/organisms/NavBar";
+import FAQSection from "@/components/organisms/Faq/faqs";
 // Image card data array with titles
 const FeatureCard = [
   {
@@ -521,7 +522,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-
+     <FAQSection />
     </div>
 
 
