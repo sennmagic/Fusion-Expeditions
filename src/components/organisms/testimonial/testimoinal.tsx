@@ -47,7 +47,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ quote, name, role, im
         backgroundColor="#f7931e"
         iconPadding={10}
         borderRadius="50%"
-        direction="left"
+        direction="down"
         position="top-left"
       />
     <div className="min-w-[320px] max-w-[400px]  h-[250px] bg-orange-200 rounded-xl p-6 snap-center flex-shrink-0 shadow-md">
@@ -82,7 +82,14 @@ const TestimonialCarousel = () => {
         buttonText="What They Say"
       />
 
-      <div className="flex items-center gap-6  px-1 py-6 bg-[linear-gradient(90deg,_#FEF9EE_0.88%,_#1C9ADB_32.63%,_#0F7BBA_70.26%,_#FEF9EE_100%)] ">
+    <div
+      className="flex items-center gap-6  px-1 py-6 bg-[linear-gradient(90deg,_#FEF9EE_0.88%,_#1C9ADB_32.63%,_#0F7BBA_70.26%,_#FEF9EE_100%)]"
+      style={{
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: '60% 100%',
+      }}
+    >
         {testimonials.map((t, i) => (
           <TestimonialCard key={i} {...t} />
         ))}
