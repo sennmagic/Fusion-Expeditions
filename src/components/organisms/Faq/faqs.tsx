@@ -57,38 +57,65 @@ export default function FAQSection() {
       />
 
       <div className="space-y-4">
-        {faqs.map((faq) => (
-          <div
-          key={faq.id}
-          className={`rounded-xl p-6 text-black border border-gray-200 shadow-sm transition-all duration-300 ease-in-out ${
-            openId === faq.id ? 'bg-orange-200' : ''
-          }`}
-  
-          >
-            <button
-              onClick={() => toggleFAQ(faq.id)}
-              className="w-full flex justify-between items-center text-left "
+        {faqs.map((faq) => {
+          const isOpen = openId === faq.id;
+          return (
+            <div
+              key={faq.id}
+              className={`rounded-xl p-6 text-black border border-gray-200 shadow-sm transition-all duration-300 ease-in-out ${
+                isOpen ? 'bg-orange-200' : ''
+              }`}
             >
-              <span className="text-lg font-semibold">
-                {faq.question}
-              </span>
-              <span className="ml-4">
-                {openId === faq.id ? (
-                  <Minus className="w-8 h-8 text-white bg-orange-500 rounded" />
-                ) : (
-                  <Plus className="w-8 h-8 text-white bg-orange-500 rounded" />
-                )}
-              </span>
-            </button>
+              <button
+                onClick={() => toggleFAQ(faq.id)}
+                className="w-full flex justify-between items-center text-left"
+              >
+                <span className="text-lg font-semibold">
+                  {faq.question}
+                </span>
+                <span className="ml-4">
+                  {isOpen ? (
+                    <Minus className="w-8 h-8 text-white bg-orange-200 rounded" />
+                  ) : (
+                    <Plus className="w-8 h-8 text-white bg-orange-200 rounded" />
+                  )}
+                </span>
+              </button>
 
-            {openId === faq.id && (
-              <p className="mt-2 text-sm text-gray-800 ">
-                {faq.answer}
-              </p>
-            )}
-          </div>
-        ))}
+              <div
+                className={`transition-max-height duration-500 ease-in-out ${
+                  isOpen ? 'max-h-96 mt-2' : 'max-h-0 overflow-hidden'
+                }`}
+              >
+                <p className="text-sm text-gray-800">
+                  {faq.answer}
+                </p>
+
+                {/* Bottom sliding bar animation */}
+                {isOpen && (
+                  <div className="h-[2px] w-full bg-black mt-4 animate-slideIn" />
+                )}
+              </div>
+            </div>
+          );
+        })}
       </div>
+
+      {/* Tailwind custom animation */}
+      <style jsx>{`
+        @keyframes slideIn {
+          from {
+            width: 0%;
+          }
+          to {
+            width: 100%;
+          }
+        }
+
+        .animate-slideIn {
+          animation: slideIn 0.4s ease-out forwards;
+        }
+      `}</style>
     </div>
   );
 }
